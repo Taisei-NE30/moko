@@ -19,9 +19,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	//for _, tweet := range tweets {
+	//	fmt.Println(tweet.Text)
+	//}
 
-	for _, tweet := range tweets {
-		fmt.Println(tweet.Text)
-	}
 }
-
