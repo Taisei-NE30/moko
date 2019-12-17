@@ -14,7 +14,7 @@ func main() {
 	client := twitter.NewClient(httpClient)
 
 	tweets, _, err := client.Timelines.HomeTimeline(&twitter.HomeTimelineParams{
-		Count: 20,
+		Count: 200,
 	})
 	if err != nil {
 		panic(err)
@@ -22,5 +22,6 @@ func main() {
 	//for _, tweet := range tweets {
 	//	fmt.Println(tweet.Text)
 	//}
+	chain := NewChain()
 
 }
