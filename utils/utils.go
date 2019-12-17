@@ -1,6 +1,9 @@
 package utils
 
-import "github.com/dghubble/go-twitter/twitter"
+import (
+	"github.com/dghubble/go-twitter/twitter"
+	"regexp"
+)
 
 func TweetToStrings(tweets *[]twitter.Tweet) []string {
 	returnStrings := make([]string, 0)
@@ -8,4 +11,22 @@ func TweetToStrings(tweets *[]twitter.Tweet) []string {
 		returnStrings = append(returnStrings, tweet.Text)
 	}
 	return returnStrings
+}
+
+func removeURL(text string) string {
+	re := regexp.MustCompile(`(http|https)://t.co/\w+`)
+	removedText := re.ReplaceAllString(text, "")
+	return removedText
+}
+
+func removeRT(text string) string {
+	re := regexp.MustCompile(`^RT\s@\w+:\s$`)
+	removedText := re.ReplaceAllString(text, "")
+	return removedText
+}
+
+func removeReply(text string) string {
+	re := regexp.MustCompile(`@\w+`)
+	removedText := re.ReplaceAllString(text, "")
+	return removedText
 }

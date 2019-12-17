@@ -15,7 +15,8 @@ func main() {
 	client := twitter.NewClient(httpClient)
 
 	tweets, _, err := client.Timelines.HomeTimeline(&twitter.HomeTimelineParams{
-		Count: 200,
+		Count:    200,
+		TrimUser: twitter.Bool(true),
 	})
 	if err != nil {
 		panic(err)
