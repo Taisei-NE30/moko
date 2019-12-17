@@ -1,6 +1,8 @@
 package main
 
-import "github.com/ikawaha/kagome/tokenizer"
+import (
+	"github.com/ikawaha/kagome/tokenizer"
+)
 
 var t = tokenizer.New()
 

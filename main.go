@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/dghubble/go-twitter/twitter"
 	"gomoko/config"
+	"gomoko/utils"
 )
 
 func main() {
@@ -22,6 +23,12 @@ func main() {
 	//for _, tweet := range tweets {
 	//	fmt.Println(tweet.Text)
 	//}
+	tweetsStrings := utils.TweetToStrings(&tweets)
+	var tokens []string
 	chain := NewChain()
-
+	for _, tweet := range tweetsStrings {
+		tokens = Tokenize(tweet)
+		chain.Add(tokens)
+	}
+	fmt.Println(GenerateTweetText(chain))
 }
