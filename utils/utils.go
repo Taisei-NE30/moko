@@ -13,6 +13,13 @@ func TweetToStrings(tweets *[]twitter.Tweet) []string {
 	return returnStrings
 }
 
+func RegexTweet(text string) string {
+	text = removeURL(text)
+	text = removeRT(text)
+	text = removeReply(text)
+	return text
+}
+
 func removeURL(text string) string {
 	re := regexp.MustCompile(`(http|https)://t.co/\w+`)
 	removedText := re.ReplaceAllString(text, "")

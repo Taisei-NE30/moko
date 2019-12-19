@@ -31,5 +31,6 @@ func main() {
 		tokens = Tokenize(tweet)
 		chain.Add(tokens)
 	}
-	fmt.Println(GenerateTweetText(chain))
+	tweetText := utils.RegexTweet(GenerateTweetText(chain))
+	fmt.Println(tweetText)
 }
