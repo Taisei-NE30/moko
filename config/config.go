@@ -4,15 +4,14 @@ import (
 	"github.com/BurntSushi/toml"
 	"github.com/dghubble/oauth1"
 	"net/http"
-
 	//"os"
 )
 
 type Config struct {
-	ConsumerKey string `toml:"consumerKey"`
+	ConsumerKey    string `toml:"consumerKey"`
 	ConsumerSecret string `toml:"consumerSecret"`
-	AccessToken string `toml:"accessToken"`
-	AccessSecret string `toml:"accessSecret"`
+	AccessToken    string `toml:"accessToken"`
+	AccessSecret   string `toml:"accessSecret"`
 }
 
 var config Config
@@ -30,6 +29,6 @@ func NewHttpClient() (*http.Client, error) {
 	//oauthConfig = oauth1.NewConfig(os.Getenv("CONSUMER_KEY"), os.Getenv("CONSUMER_SECRET"))
 	//oauthToken = oauth1.NewToken(os.Getenv("ACCESS_TOKEN"), os.Getenv("ACCESS_SECRET"))
 
-	httpClinet := oauthConfig.Client(oauth1.NoContext, oauthToken)
-	return httpClinet, nil
+	httpClient := oauthConfig.Client(oauth1.NoContext, oauthToken)
+	return httpClient, nil
 }
