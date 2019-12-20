@@ -8,6 +8,9 @@ import (
 func TweetToStrings(tweets *[]twitter.Tweet) []string {
 	returnStrings := make([]string, 0)
 	for _, tweet := range *tweets {
+		if tweet.User.Protected {
+			continue
+		}
 		returnStrings = append(returnStrings, tweet.Text)
 	}
 	return returnStrings
