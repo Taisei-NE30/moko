@@ -16,6 +16,7 @@ func main() {
 	}
 	client := twitter.NewClient(httpClient)
 	wg := &sync.WaitGroup{}
+	ch := make(chan []twitter.Tweet)
 
 	wg.Add(1)
 	go func() {
@@ -27,6 +28,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		ch <- tweets
 		//for _, tweet := range tweets {
 		//	fmt.Println(tweet.Text)
 		//}
@@ -42,17 +44,40 @@ func main() {
 	}()
 
 	wg.Add(1)
+	// メンションに返信する
 	go func() {
 		defer wg.Done()
-		mentions, _, err := client.Timelines.MentionTimeline(&twitter.MentionTimelineParams{
-			Count: 50,
+
+		myTweets, _, err := client.Timelines.UserTimeline(&twitter.UserTimelineParams{
+			ScreenName: "mokonee0607",
+			Count:      10,
 		})
 		if err != nil {
 			log.Fatal(err)
 		}
 
+		var replyedIds []int64
+		for _, myTweet := range myTweets {
+			if myTweet.InReplyToStatusID != 0 {
+				replyedIds = append(replyedId, myTweet.InReplyToStatusID)
+			}
+		}
+
+		mentions, _, err := client.Timelines.MentionTimeline(&twitter.MentionTimelineParams{
+			Count: 20,
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		tweets := <-ch
+
 		for _, mention := range mentions {
-			fmt.Println(mention.Text)
+			for _, replyedId := range replyedIds {
+				if mention.ID != replyedId {
+
+				}
+			}
 		}
 
 	}()
