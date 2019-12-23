@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/dghubble/go-twitter/twitter"
+	"github.com/mb-14/gomarkov"
 	"gomoko/config"
 	"gomoko/utils"
 	"log"
@@ -16,7 +17,7 @@ func main() {
 	}
 	client := twitter.NewClient(httpClient)
 	wg := &sync.WaitGroup{}
-	ch := make(chan []twitter.Tweet)
+	chainCh := make(chan *gomarkov.Chain)
 
 	wg.Add(1)
 	go func() {
@@ -28,19 +29,22 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		ch <- tweets
 		//for _, tweet := range tweets {
 		//	fmt.Println(tweet.Text)
 		//}
 		tweetsStrings := utils.TweetToStrings(&tweets)
+
 		var tokens []string
 		chain := NewChain()
+
 		for _, tweet := range tweetsStrings {
+			tweet = utils.RegexTweet(tweet)
 			tokens = Tokenize(tweet)
 			chain.Add(tokens)
 		}
-		tweetText := utils.RegexTweet(GenerateTweetText(chain))
-		fmt.Println(tweetText)
+		chainCh <- chain
+
+		fmt.Println(GenerateTweetText(chain))
 	}()
 
 	wg.Add(1)
@@ -59,7 +63,7 @@ func main() {
 		var replyedIds []int64
 		for _, myTweet := range myTweets {
 			if myTweet.InReplyToStatusID != 0 {
-				replyedIds = append(replyedId, myTweet.InReplyToStatusID)
+				replyedIds = append(replyedIds, myTweet.InReplyToStatusID)
 			}
 		}
 
@@ -70,12 +74,14 @@ func main() {
 			log.Fatal(err)
 		}
 
-		tweets := <-ch
+		chain := <-chainCh
 
 		for _, mention := range mentions {
 			for _, replyedId := range replyedIds {
 				if mention.ID != replyedId {
-
+					replyUser := mention.User.ScreenName
+					tweetText := utils.RegexTweet(GenerateTweetText(chain))
+					fmt.Printf("@%s %s\n", replyUser, tweetText)
 				}
 			}
 		}

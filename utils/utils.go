@@ -30,7 +30,7 @@ func removeURL(text string) string {
 }
 
 func removeRT(text string) string {
-	re := regexp.MustCompile(`^RT\s@\w+:\s$`)
+	re := regexp.MustCompile(`^RT\s@\w+:\s`)
 	removedText := re.ReplaceAllString(text, "")
 	return removedText
 }
