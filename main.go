@@ -7,6 +7,7 @@ import (
 	"gomoko/config"
 	"gomoko/utils"
 	"log"
+	"strconv"
 	"sync"
 )
 
@@ -93,6 +94,29 @@ func main() {
 	go func() {
 		defer wg.Done()
 
+		followerIDs, _, err := client.Followers.IDs(&twitter.FollowerIDParams{})
+		if err != nil {
+			log.Fatal(err)
+		}
+		stringFollowerIDs := utils.IntToStringSlice(followerIDs.IDs)
+
+		friendIDs, _, err := client.Friends.IDs(&twitter.FriendIDParams{})
+		if err != nil {
+			log.Fatal(err)
+		}
+		stringFriendIDs := utils.IntToStringSlice(friendIDs.IDs)
+
+		ffDiffIDs := utils.Difference(stringFollowerIDs, stringFriendIDs)
+
+		for _, id := range ffDiffIDs {
+			intID, _ := strconv.Atoi(id)
+			_, _, err := client.Friendships.Create(&twitter.FriendshipCreateParams{
+				UserID: int64(intID),
+			})
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
 	}()
 
 	wg.Wait()

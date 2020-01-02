@@ -42,7 +42,10 @@ func removeReply(text string) string {
 }
 
 // ２つのstringのsliceを比較し、差分を返す関数
-func difference(a, b []string) []string {
+// a := []string{"apple", "banana", "orange"}
+// b := []string{"apple", "banana"}
+// => ["orange"]
+func Difference(a, b []string) []string {
 	mapB := make(map[string]struct{}, len(b))
 	for _, x := range b {
 		mapB[x] = struct{}{}
@@ -54,4 +57,12 @@ func difference(a, b []string) []string {
 		}
 	}
 	return diff
+}
+
+func IntToStringSlice(slice []int64) []string {
+	returnSlice := make([]string, len(slice))
+	for _, val := range slice {
+		returnSlice = append(returnSlice, string(val))
+	}
+	return returnSlice
 }
