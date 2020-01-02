@@ -47,8 +47,8 @@ func main() {
 		fmt.Println(GenerateTweetText(chain))
 	}()
 
-	wg.Add(1)
 	// メンションに返信する
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
 
@@ -88,6 +88,7 @@ func main() {
 
 	}()
 
+	// 自動フォロバ
 	wg.Add(1)
 	go func() {
 		defer wg.Done()

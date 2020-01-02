@@ -40,3 +40,18 @@ func removeReply(text string) string {
 	removedText := re.ReplaceAllString(text, "")
 	return removedText
 }
+
+// ２つのstringのsliceを比較し、差分を返す関数
+func difference(a, b []string) []string {
+	mapB := make(map[string]struct{}, len(b))
+	for _, x := range b {
+		mapB[x] = struct{}{}
+	}
+	var diff []string
+	for _, x := range a {
+		if _, found := mapB[x]; !found {
+			diff = append(diff, x)
+		}
+	}
+	return diff
+}
