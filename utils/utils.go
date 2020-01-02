@@ -2,6 +2,7 @@ package utils
 
 import (
 	"github.com/dghubble/go-twitter/twitter"
+	"golang.org/x/tools/go/ssa/interp/testdata/src/strings"
 	"regexp"
 )
 
@@ -65,4 +66,24 @@ func IntToStringSlice(slice []int64) []string {
 		returnSlice = append(returnSlice, string(val))
 	}
 	return returnSlice
+}
+
+func MatchToMyName(text string) bool {
+	var matchWords = []string{
+		"もこちゃん",
+		"もこねえ",
+		"もこ姉",
+		"もこ姐",
+		"もこねぇ",
+		"もこあね",
+		"もこぴく",
+		"曖昧模糊",
+	}
+
+	for _, matchWord := range matchWords {
+		if strings.Contains(text, matchWord) {
+			return true
+		}
+	}
+	return false
 }

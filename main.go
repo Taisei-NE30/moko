@@ -45,7 +45,11 @@ func main() {
 		}
 		chainCh <- chain
 
-		fmt.Println(GenerateTweetText(chain))
+		//fmt.Println(GenerateTweetText(chain))
+		_, _, err = client.Statuses.Update(GenerateTweetText(chain), nil)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}()
 
 	// メンションに返信する
@@ -82,7 +86,13 @@ func main() {
 				if mention.ID != replyedId {
 					replyUser := mention.User.ScreenName
 					tweetText := utils.RegexTweet(GenerateTweetText(chain))
-					fmt.Printf("@%s %s\n", replyUser, tweetText)
+					//fmt.Printf("@%s %s\n", replyUser, tweetText)
+					_, _, err := client.Statuses.Update(fmt.Sprintf("@%s %s", replyUser, tweetText), &twitter.StatusUpdateParams{
+						InReplyToStatusID: mention.ID,
+					})
+					if err != nil {
+						log.Fatal(err)
+					}
 				}
 			}
 		}
@@ -94,13 +104,13 @@ func main() {
 	go func() {
 		defer wg.Done()
 
-		followerIDs, _, err := client.Followers.IDs(&twitter.FollowerIDParams{})
+		followerIDs, _, err := client.Followers.IDs(nil)
 		if err != nil {
 			log.Fatal(err)
 		}
 		stringFollowerIDs := utils.IntToStringSlice(followerIDs.IDs)
 
-		friendIDs, _, err := client.Friends.IDs(&twitter.FriendIDParams{})
+		friendIDs, _, err := client.Friends.IDs(nil)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -117,6 +127,13 @@ func main() {
 				log.Fatal(err)
 			}
 		}
+	}()
+
+	// 自動いいね
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+
 	}()
 
 	wg.Wait()
