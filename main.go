@@ -19,6 +19,7 @@ func main() {
 	client := twitter.NewClient(httpClient)
 	wg := &sync.WaitGroup{}
 	chainCh := make(chan *gomarkov.Chain)
+	twCh := make(chan []twitter.Tweet)
 
 	wg.Add(1)
 	go func() {
@@ -30,6 +31,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		twCh <- tweets
 		//for _, tweet := range tweets {
 		//	fmt.Println(tweet.Text)
 		//}
@@ -133,7 +136,18 @@ func main() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+		tweets := <-twCh
 
+		for _, tweet := range tweets {
+			if utils.MatchToMyName(tweet.Text) {
+				_, _, err := client.Favorites.Create(&twitter.FavoriteCreateParams{
+					ID: tweet.ID,
+				})
+				if err != nil {
+					log.Fatal(err)
+				}
+			}
+		}
 	}()
 
 	wg.Wait()
