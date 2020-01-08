@@ -63,8 +63,10 @@
 			"revisionTime": "2019-11-21T13:18:57Z"
 		},
 		{
+			"checksumSHA1": "sTVs9Xc2MJQzyy9Ofn7FJRe9zVw=",
 			"path": "github.com/ikawaha/kagome/tokenizer",
-			"revision": ""
+			"revision": "3641b3f2954eef043774b7e1441c24e42cf1d657",
+			"revisionTime": "2019-11-21T13:18:57Z"
 		},
 		{
 			"checksumSHA1": "lCM6PbV1VLn6/8n4LxTfdiGcNzo=",
