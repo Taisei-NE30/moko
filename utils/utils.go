@@ -79,6 +79,7 @@ func MatchToMyName(text string) bool {
 		"もこあね",
 		"もこぴく",
 		"曖昧模糊",
+		"もこさん",
 	}
 
 	for _, matchWord := range matchWords {
