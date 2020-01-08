@@ -4,7 +4,7 @@ import (
 	"github.com/BurntSushi/toml"
 	"github.com/dghubble/oauth1"
 	"net/http"
-	//"os"
+	"os"
 )
 
 type Config struct {
@@ -21,13 +21,13 @@ func NewHttpClient() (*http.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	oauthConfig := oauth1.NewConfig(config.ConsumerKey, config.ConsumerSecret)
-	oauthToken := oauth1.NewToken(config.AccessToken, config.AccessSecret)
+	//oauthConfig := oauth1.NewConfig(config.ConsumerKey, config.ConsumerSecret)
+	//oauthToken := oauth1.NewToken(config.AccessToken, config.AccessSecret)
 
 	/*** production ***/
 
-	//oauthConfig = oauth1.NewConfig(os.Getenv("CONSUMER_KEY"), os.Getenv("CONSUMER_SECRET"))
-	//oauthToken = oauth1.NewToken(os.Getenv("ACCESS_TOKEN"), os.Getenv("ACCESS_SECRET"))
+	oauthConfig := oauth1.NewConfig(os.Getenv("CONSUMER_KEY"), os.Getenv("CONSUMER_SECRET"))
+	oauthToken := oauth1.NewToken(os.Getenv("ACCESS_TOKEN"), os.Getenv("ACCESS_SECRET"))
 
 	httpClient := oauthConfig.Client(oauth1.NoContext, oauthToken)
 	return httpClient, nil
