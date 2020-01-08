@@ -2,8 +2,9 @@ package utils
 
 import (
 	"github.com/dghubble/go-twitter/twitter"
-	"golang.org/x/tools/go/ssa/interp/testdata/src/strings"
 	"regexp"
+	"strconv"
+	"strings"
 )
 
 func TweetToStrings(tweets *[]twitter.Tweet) []string {
@@ -63,7 +64,7 @@ func Difference(a, b []string) []string {
 func IntToStringSlice(slice []int64) []string {
 	returnSlice := make([]string, len(slice))
 	for _, val := range slice {
-		returnSlice = append(returnSlice, string(val))
+		returnSlice = append(returnSlice, strconv.Itoa(int(val)))
 	}
 	return returnSlice
 }
