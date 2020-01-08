@@ -9,6 +9,7 @@ import (
 	"log"
 	"strconv"
 	"sync"
+	"time"
 )
 
 func main() {
@@ -17,6 +18,13 @@ func main() {
 		panic(err)
 	}
 	client := twitter.NewClient(httpClient)
+	for {
+		doMoko(client)
+		time.Sleep(10 * time.Minute)
+	}
+}
+
+func doMoko(client *twitter.Client) {
 	wg := &sync.WaitGroup{}
 	chainCh := make(chan *gomarkov.Chain)
 	twCh := make(chan []twitter.Tweet)
