@@ -1,1 +1,1 @@
-web: gomoko
+worker: gomoko
