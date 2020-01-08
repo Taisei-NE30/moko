@@ -39,8 +39,38 @@
 			"revisionTime": "2019-03-18T16:54:38Z"
 		},
 		{
+			"checksumSHA1": "v1QwQCF3HrTtCBRO5xmHn06TMjg=",
+			"path": "github.com/ikawaha/kagome/internal/da",
+			"revision": "3641b3f2954eef043774b7e1441c24e42cf1d657",
+			"revisionTime": "2019-11-21T13:18:57Z"
+		},
+		{
+			"checksumSHA1": "tz0l5jxtA4Lesn9Qzie4DfIMcJY=",
+			"path": "github.com/ikawaha/kagome/internal/dic",
+			"revision": "3641b3f2954eef043774b7e1441c24e42cf1d657",
+			"revisionTime": "2019-11-21T13:18:57Z"
+		},
+		{
+			"checksumSHA1": "boZy/b+7p9PFTy3r9AlTzHmkjjk=",
+			"path": "github.com/ikawaha/kagome/internal/dic/data",
+			"revision": "3641b3f2954eef043774b7e1441c24e42cf1d657",
+			"revisionTime": "2019-11-21T13:18:57Z"
+		},
+		{
+			"checksumSHA1": "EfDevNTvtS1b3c5HU9GzxPRajUM=",
+			"path": "github.com/ikawaha/kagome/internal/lattice",
+			"revision": "3641b3f2954eef043774b7e1441c24e42cf1d657",
+			"revisionTime": "2019-11-21T13:18:57Z"
+		},
+		{
 			"path": "github.com/ikawaha/kagome/tokenizer",
 			"revision": ""
+		},
+		{
+			"checksumSHA1": "lCM6PbV1VLn6/8n4LxTfdiGcNzo=",
+			"path": "github.com/mb-14/gomarkov",
+			"revision": "044dd0dcb5e7875ec824df72259c523d03aa4f49",
+			"revisionTime": "2019-01-25T09:45:12Z"
 		}
 	],
 	"rootPath": "gomoko"
