@@ -1,6 +1,47 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
+	"package": [
+		{
+			"checksumSHA1": "Pc2ORQp+VY3Un/dkh4QwLC7R6lE=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005",
+			"revisionTime": "2018-08-15T10:47:33Z"
+		},
+		{
+			"checksumSHA1": "q80QFVMYa7tNChN4JZ28WVgePCs=",
+			"path": "github.com/cenkalti/backoff",
+			"revision": "2146c93394225c3732078705043ce9f26584d334",
+			"revisionTime": "2019-05-06T07:51:56Z"
+		},
+		{
+			"checksumSHA1": "eEVhwjzv65+vChFElzPC/mLpHGA=",
+			"path": "github.com/dghubble/go-twitter/twitter",
+			"revision": "39e5462e111ffe165c62a88e2c25e1c1d1085bdb",
+			"revisionTime": "2019-07-19T07:23:43Z"
+		},
+		{
+			"checksumSHA1": "YLAimSFxvjZ1ZBHRDaTGOTwS02M=",
+			"path": "github.com/dghubble/oauth1",
+			"revision": "126d4cb36efa0a568cc4ab5c3431eba1c4f040bd",
+			"revisionTime": "2020-01-07T05:35:03Z"
+		},
+		{
+			"checksumSHA1": "h6xGIAcURRly4T3CI6UMkMhsqzU=",
+			"path": "github.com/dghubble/sling",
+			"revision": "0997dd0739eecf8d0d3e5e6e3a9d5e81a1fd5056",
+			"revisionTime": "2019-11-23T21:27:59Z"
+		},
+		{
+			"checksumSHA1": "p3IB18uJRs4dL2K5yx24MrLYE9A=",
+			"path": "github.com/google/go-querystring/query",
+			"revision": "c8c88dbee036db4e4808d1f2ec8c2e15e11c3f80",
+			"revisionTime": "2019-03-18T16:54:38Z"
+		},
+		{
+			"path": "github.com/ikawaha/kagome/tokenizer",
+			"revision": ""
+		}
+	],
 	"rootPath": "gomoko"
 }
