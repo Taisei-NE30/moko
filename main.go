@@ -20,7 +20,7 @@ func main() {
 	client := twitter.NewClient(httpClient)
 	for {
 		doMoko(client)
-		time.Sleep(10 * time.Minute)
+		time.Sleep(30 * time.Minute)
 	}
 }
 
