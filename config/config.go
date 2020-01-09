@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/BurntSushi/toml"
 	"github.com/dghubble/oauth1"
 	"net/http"
 	"os"
@@ -17,10 +16,12 @@ type Config struct {
 var config Config
 
 func NewHttpClient() (*http.Client, error) {
-	_, err := toml.DecodeFile("config.toml", &config)
-	if err != nil {
-		return nil, err
-	}
+	/*** local ***/
+
+	//_, err := toml.DecodeFile("config.toml", &config)
+	//if err != nil {
+	//	return nil, err
+	//}
 	//oauthConfig := oauth1.NewConfig(config.ConsumerKey, config.ConsumerSecret)
 	//oauthToken := oauth1.NewToken(config.AccessToken, config.AccessSecret)
 
