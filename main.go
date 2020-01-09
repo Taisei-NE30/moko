@@ -6,6 +6,7 @@ import (
 	"github.com/mb-14/gomarkov"
 	"gomoko/config"
 	"gomoko/utils"
+	"html"
 	"log"
 	"strconv"
 	"sync"
@@ -42,6 +43,7 @@ func main() {
 		chain := NewChain()
 
 		for _, tweet := range tweetsStrings {
+			tweet = html.UnescapeString(tweet)
 			tweet = utils.RegexTweet(tweet)
 			tokens = Tokenize(tweet)
 			chain.Add(tokens)
