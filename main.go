@@ -86,20 +86,25 @@ func main() {
 
 		chain := <-chainCh
 
+		shouldReply := true
 		for _, mention := range mentions {
 			for _, replyedId := range replyedIds {
-				if mention.ID != replyedId {
-					replyUser := mention.User.ScreenName
-					tweetText := utils.RegexTweet(GenerateTweetText(chain))
-					//fmt.Printf("@%s %s\n", replyUser, tweetText)
-					_, _, err := client.Statuses.Update(fmt.Sprintf("@%s %s", replyUser, tweetText), &twitter.StatusUpdateParams{
-						InReplyToStatusID: mention.ID,
-					})
-					if err != nil {
-						log.Fatal(err)
-					}
+				if mention.ID == replyedId {
+					shouldReply = false
 				}
 			}
+			if shouldReply {
+				replyUser := mention.User.ScreenName
+				tweetText := utils.RegexTweet(GenerateTweetText(chain))
+				//fmt.Printf("@%s %s\n", replyUser, tweetText)
+				_, _, err := client.Statuses.Update(fmt.Sprintf("@%s %s", replyUser, tweetText), &twitter.StatusUpdateParams{
+					InReplyToStatusID: mention.ID,
+				})
+				if err != nil {
+					log.Fatal(err)
+				}
+			}
+			shouldReply = true
 		}
 
 	}()
