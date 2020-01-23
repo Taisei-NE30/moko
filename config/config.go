@@ -13,8 +13,6 @@ type Config struct {
 	AccessSecret   string `toml:"accessSecret"`
 }
 
-var config Config
-
 func NewHttpClient() (*http.Client, error) {
 	/*** local ***/
 
