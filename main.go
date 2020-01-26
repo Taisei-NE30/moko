@@ -64,7 +64,7 @@ func main() {
 
 		myTweets, _, err := client.Timelines.UserTimeline(&twitter.UserTimelineParams{
 			ScreenName: "mokonee0607",
-			Count:      10,
+			Count:      100,
 		})
 		if err != nil {
 			log.Fatal(err)
